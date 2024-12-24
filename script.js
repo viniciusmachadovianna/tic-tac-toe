@@ -1,17 +1,20 @@
 const $=(el)=>document.querySelector(el),
     id=(el)=>document.getElementById(el),
     header = document.querySelector("header"),
-    card = document.querySelector('nav'),
+    card = document.querySelector('aside'),
     line = document.querySelector('rect'),
     main = document.querySelector("main"),
     tiles = main.querySelectorAll('div'),
     footer = document.querySelector("footer"),
     restart = document.getElementById('restart');
 var turn = "✖", //◯
-    turnsTaken = 0;
+    turnsTaken = 0,
+    winsX=0,
+    winsO=0;
 header.style.display='flex';
 main.style.display='none';
 card.style.display='none';
+card.textContent=turn;
 footer.style.display='none';
 header.addEventListener("click",()=>{
     header.style.display = "none";
@@ -19,13 +22,29 @@ header.addEventListener("click",()=>{
     main.style.display = "flex";
     footer.style.display = "flex";
 });
-card.addEventListener('click',()=>{
+card.addEventListener('mouseover',()=>{
     card.style.transform='rotateY(180deg)';
+})
+card.addEventListener('mouseout',()=>{
+    card.style.transform='rotateY(0deg)';
+})
+restart.addEventListener('mouseover',()=>{
+    restart.style.transform='rotate(180deg)';
+    restart.style.background='rgb(185, 4, 4)';
+    restart.querySelector('img').style.filter='invert()';
+})
+restart.addEventListener('mouseout',()=>{
+    restart.style.transform='rotate(0deg)';
+    restart.style.background='aliceblue';
+    restart.querySelector('img').style.filter='invert(0)';
 })
 function changeBG(el, color = 'none'){
     el.style.background=color;
 }
 function resetBoard(){
+    turnsTaken=0;
+    restart.style.background='aliceblue';
+    restart.querySelector('img').style.filter='invert(0)';
     tiles.forEach((tile)=>{
         tile.textContent='';
         changeBG(tile,'rgba(67, 0, 67,.9)');
@@ -38,6 +57,8 @@ function resetBoard(){
 restart.addEventListener('click',()=>{resetBoard()})
 function switchTurn(){
     turn = turn === "✖" ? "◯" : "✖";
+    card.textContent=turn;
+    card.style.transform= turn ==="◯" ? 'rotateY(180deg)' : 'rotateY(0deg)';
 }
 tiles.forEach(tile =>{
     tile.addEventListener('click',()=>{
@@ -45,6 +66,13 @@ tiles.forEach(tile =>{
         tile.innerHTML = turn;
         turnsTaken += 1;
         if(turnsTaken>=5){checkVictoryCondition()};
+        if(turnsTaken===9){
+            tiles.forEach((tile)=>{
+                tile.style.color='lightgray';
+                restart.style.background='rgb(185, 4, 4)';
+                restart.querySelector('img').style.filter='invert(1)';
+            })
+        }
         changeBG(tile);
         switchTurn();
     })
@@ -83,8 +111,23 @@ function checkVictoryCondition(){
                 changeBG(id(turn),'rgb(93, 255, 174)');
             });
             line.style.display='flex';
-            line.style.transform=`rotate(${condition.deg}deg) translateY(${condition.y}px) translateX(${condition.x}px)`
-            id(turn).textContent = parseInt(id(turn).textContent) + 1;
+            line.style.transform=`rotate(${condition.deg}deg) translateY(${condition.y}px) translateX(${condition.x}px)`;
+            let x = id('✖');
+            let o = id('◯');
+            if(turn==='✖'){
+                winsX+=1;
+                x.textContent=winsX;
+            }else{
+                winsO+=1;
+                o.textContent=winsO;
+            }
+            if (winsX===winsO){
+                x.removeAttribute('class');
+                o.removeAttribute('class');
+            }
+            else if(winsX>winsO){x.className='fav';}
+            else{o.className='fav'}
+            turnsTaken=0;
         }
     })
 }

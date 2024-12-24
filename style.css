@@ -49,24 +49,21 @@ span{
 header:hover > span{
     color: rgba(240, 248, 255, 0.1);
 }
-nav{
+aside{
     border-radius: 50%;
     margin-bottom: 20px;
     width: 100px;
     height: 100px;
-    perspective: 500px;
     background: purple;
     cursor: pointer;
+    justify-content: center;
+    color: aliceblue;
+    font-size: 4em;
+    line-height: 100px;
     transition: .5s;
 }
-nav:hover{
+aside:hover{
     background: rgb(179, 15, 179);
-}
-.turnFlipper>div{
-    color: aliceblue;
-}
-.back{
-    transform: rotateY(180deg);
 }
 main{
     position: relative;
@@ -75,7 +72,6 @@ main{
     display: flex;
     flex-flow: row wrap;
 }
-
 rect{
     position: absolute;
     left: 15px;
@@ -124,6 +120,14 @@ output{
 }
 #◯::before{content: '◯';}
 #✖::before{content: '✖';}
+.fav::after{
+    content: '★';
+    position: absolute;
+    color: rgb(255, 230, 147);
+    transform: rotate(-15deg);
+    top: -20px;
+    left: 0;
+}
 footer>button{
     height: 50px;
     width: 50px;
@@ -134,13 +138,7 @@ footer>button{
     flex-flow: column;
     justify-content: center;
     align-items: center;
-}
-footer>button:hover{
-    transform: rotate(180deg);
-    background: rgb(185, 4, 4);
-}
-footer>button:hover>img{
-    filter: invert();
+    background: aliceblue;
 }
 button{
     cursor: pointer;
