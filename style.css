@@ -1,34 +1,54 @@
-body{
+html,body{
     margin: 0;
+    padding: 0;
     width: 100%;
-    height: 100vh;
+    min-height: fit-content;
+    user-select: none;
+}
+body{
+    min-height: 100vh;
     background: linear-gradient(45deg,purple 0%,pink 100%);
+    background-size: cover;
+    background-position: center center;
+    overflow: hidden;
     font-family: Arial, Helvetica, sans-serif;
+    justify-content: flex-start;
 }
 body,header,div{
     display: flex;
     flex-flow: column;
-    justify-content: center;
     align-items: center;
 }
+header,div{
+    justify-content: center;
+}
 header{
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translateY(-50%) translateX(-50%);
     display: flex;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     background: purple;
     border-radius: 50%;
-    width: 500px;
-    height: 500px;
-    font-size: 7em;
+    min-width: 300px;
+    min-height: 300px;
+    max-height: 500px;
+    max-height: 500px;
     color: aliceblue;
     border: 10px solid transparent;
     transition: .4s ease;
     cursor: pointer;
-    display: none;
 }
+header>span,header::after{
+    font-size: 4em;
+}
+sub{
+    text-align: center;
+    display: flex;
+    align-items: center;
+}
+sub>img{margin-left: 10px;}
 header::after{
     content: "▶︎";
     color: transparent;
@@ -43,14 +63,19 @@ header:hover::after{
     display: flex;
     color: aliceblue;
 }
+header:hover>sub>img{
+    filter: opacity(.5);
+}
 span{
     transition: .4s ease;
 }
-header:hover > span{
+header:hover>span,header:hover>sub{
     color: rgba(240, 248, 255, 0.1);
 }
 aside{
+    display: none;
     border-radius: 50%;
+    margin-top: 20px;
     margin-bottom: 20px;
     width: 100px;
     height: 100px;
@@ -66,16 +91,16 @@ aside:hover{
     background: rgb(179, 15, 179);
 }
 main{
+    display: none;
     position: relative;
-    width: 330px;
-    height: 330px;
-    display: flex;
+    width: 310px;
+    height: 310px;
     flex-flow: row wrap;
 }
 rect{
     position: absolute;
-    left: 15px;
     display: none;
+    left: 5px;
     z-index: 1;
     width: 300px;
     height: 10px;
@@ -84,16 +109,22 @@ rect{
 main>div{
     width: 100px;
     height: 100px;
-    background: rgba(67, 0, 67,.9);
-    margin: 5px;
+    background: none;
     cursor: pointer;
     color: aliceblue;
     font-size: 4em;
     line-height: 100%;
 }
+#a1,#a2,#b1,#b2,#c1,#c2{
+    border-right: 5px solid aliceblue;
+}
+
+#a1,#a2,#a3,#b1,#b2,#b3{
+    border-bottom: 5px solid aliceblue;
+}
 footer{
+    display: none;
     margin-top: 20px;
-    display: flex;
     width: 320px;
     flex-flow: row;
     justify-content: space-evenly;
@@ -109,17 +140,26 @@ output{
     border-radius: 50%;
     text-align: center;
     line-height: 80px;
+    justify-content: center;
 }
 #◯::before,#✖::before{
     position: absolute;
-    font-size: 1.3em;
     color: aliceblue;
+    width: 80px;
+    height: 80px;
     filter: opacity(.2);
     left: 50%;
+    top: -2px;
     transform: translateX(-50%);
 }
-#◯::before{content: '◯';}
-#✖::before{content: '✖';}
+#◯::before{
+    content: '◯';
+    font-size: 1.2em;
+}
+#✖::before{
+    content: '✖';
+    font-size: 1.2em;
+}
 .fav::after{
     content: '★';
     position: absolute;
