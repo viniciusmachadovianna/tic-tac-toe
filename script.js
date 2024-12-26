@@ -66,7 +66,7 @@ tiles.forEach(tile =>{
         if(turnsTaken>=5){checkVictoryCondition()};
         if(turnsTaken===9){
             tiles.forEach((tile)=>{
-                tile.style.color='lightgray';
+                tile.style.color='rgb(185, 4, 4)';
                 changeBG(restart,'rgb(185, 4, 4)');
                 restart.querySelector('img').style.filter='invert(1)';
             })

@@ -23,6 +23,7 @@ header,div{
     justify-content: center;
 }
 header{
+    cursor: pointer;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     position: absolute;
     top: 50%;
@@ -38,17 +39,46 @@ header{
     color: aliceblue;
     border: 10px solid transparent;
     transition: .4s ease;
-    cursor: pointer;
 }
-header>span,header::after{
-    font-size: 4em;
-}
-sub{
+header>span,header::after{font-size: 4em;}
+sub,a{
     text-align: center;
     display: flex;
     align-items: center;
 }
-sub>img{margin-left: 10px;}
+sub>img{margin: 0px 10px;}
+a>img{margin: 0px 5px;}
+sub>img,a>img{width: 30px;}
+.social,footer>a{
+    cursor: pointer;
+    text-decoration: none;
+}
+footer>a{
+    margin-top: 10px;
+    color: aliceblue;
+}
+.social{
+    position: absolute;
+    text-decoration: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    background: rgb(255, 240, 250);
+    color: purple;
+    font-size: small;
+    bottom: 10px;
+    left: 50%;
+    height: 36px;
+    transform: translateX(-50%);
+    min-width: 370px;
+    padding: 2px;
+    justify-content: center;
+    border: 2px solid rgb(179, 15, 179);
+    transition: .4s;
+}
+.social:hover{
+    border: 2px solid transparent;
+}
+b{margin-right: 5px;}
 header::after{
     content: "▶︎";
     color: transparent;
@@ -126,7 +156,7 @@ footer{
     display: none;
     margin-top: 20px;
     width: 320px;
-    flex-flow: row;
+    flex-flow: row wrap;
     justify-content: space-evenly;
     align-items: center;
 }
